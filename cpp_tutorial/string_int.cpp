@@ -8,5 +8,9 @@ int main() {
 	str = "123.44";
 	double b = stod(str);
 	cout << b << endl;
+    cout << "---------" << endl;
+    string s = "97152";
+    cout << typeid(s[4] - '0') << endl;
+    cout << s[4] - '0' << endl;
 	return 0;	
 }

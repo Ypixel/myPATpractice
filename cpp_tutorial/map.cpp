@@ -18,5 +18,6 @@ int main() {
 	//cout << m.rbegin()->first << " " << m.rbegin()->second << endl;
 	cout << m.size() << endl;
     cout << m["ddd"] << endl;
+    cout << m["sdf"] << endl;
 	return 0;
 }

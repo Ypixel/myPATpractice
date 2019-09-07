@@ -1,0 +1,47 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <map>
+using namespace std;
+struct stu {
+    string name;
+    int gp, gm, gf, g;
+};
+bool cmp(stu a, stu b) {
+    if (a.g == b.g) return a.name < b.name;
+    return a.g > b.g;
+};
+map<string, int> idx;
+int main() {
+    int p, m, n, score, cnt = 1;
+    cin >> p >> m >> n;
+    vector<stu>v, ans;
+    string s;
+    for (int i = 0; i < p; i++){
+        cin >> s >> score;
+        if(score >= 200) {
+            v.push_back(stu{s, score, -1, -1, 0});
+            idx[s] = cnt++; //将v的下标+1个存入map映射的string中
+        }
+    }
+    for (int i = 0; i < m; i++) {
+        cin >> s >> score;
+        if(idx[s] != 0) v[idx[s] - 1].gm = score;
+    }
+    for (int i = 0; i < n; i++) {
+        cin >> s >> score;
+        if(idx[s] != 0) {
+            int temp = idx[s] - 1;
+            v[temp].gf = v[temp].g = score;
+            if (v[temp].gm > v[temp].gf) v[temp].g = int(v[temp].gm * 0.4 + v[temp].gf * 0.6 + 0.5);
+        }
+    }
+    for (int i = 0; i < v.size(); i++)
+        if (v[i].g >= 60) ans.push_back(v[i]);
+    sort(ans.begin(), ans.end(), cmp);
+    for (int i = 0; i < ans.size(); i++)
+        printf("%s %d %d %d %d\n", ans[i].name.c_str(), ans[i].gp, ans[i].gm, ans[i].gf, ans[i].g);
+    return 0;
+}
+
+
